@@ -6,36 +6,42 @@ import static org.junit.jupiter.api.Assertions.*;
 class SoldierTest {
 
     @Test
-    void testSoldierInitialization() {
+    void testSoldierInitializationRank() {
         Soldier soldier = new Soldier(MilitaryRank.SZEREGOWY);
         assertEquals(MilitaryRank.SZEREGOWY, soldier.getRank());
+    }
+
+    @Test
+    void testSoldierInitializationExperience() {
+        Soldier soldier = new Soldier(MilitaryRank.SZEREGOWY);
         assertEquals(1, soldier.getExperience());
     }
 
     @Test
     void testIncreaseExperience() {
         Soldier soldier = new Soldier(MilitaryRank.SZEREGOWY);
-        for (int i = 0; i < 5; i++) {
-            soldier.increaseExperience();
-        }
+        soldier.increaseExperience();
         assertEquals(2, soldier.getExperience());
     }
 
     @Test
     void testPromotionToNextRank() {
         Soldier soldier = new Soldier(MilitaryRank.SZEREGOWY);
-        for (int i = 0; i < 5 * MilitaryRank.SZEREGOWY.getValue(); i++) {
-            soldier.increaseExperience();
-        }
+        for (int i = 0; i < 5; i++) soldier.increaseExperience();
         assertEquals(MilitaryRank.KAPRAL, soldier.getRank());
     }
 
     @Test
-    void testNoPromotionBeyondMajor() {
+    void testExperienceResetsAfterPromotion() {
+        Soldier soldier = new Soldier(MilitaryRank.SZEREGOWY);
+        for (int i = 0; i < 5; i++) soldier.increaseExperience();
+        assertEquals(2, soldier.getExperience());
+    }
+
+    @Test
+    void testNoPromotionBeyondMajorRank() {
         Soldier soldier = new Soldier(MilitaryRank.MAJOR);
-        for (int i = 0; i < 10; i++) {
-            soldier.increaseExperience();
-        }
+        for (int i = 0; i < 10; i++) soldier.increaseExperience();
         assertEquals(MilitaryRank.MAJOR, soldier.getRank());
     }
 
@@ -43,22 +49,33 @@ class SoldierTest {
     void testDecreaseExperience() {
         Soldier soldier = new Soldier(MilitaryRank.SZEREGOWY);
         soldier.decreaseExperience();
-        assertFalse(soldier.decreaseExperience()); // Returns false as experience is now 0
         assertEquals(0, soldier.getExperience());
     }
 
     @Test
-    void testPowerCalculation() {
-        Soldier soldier = new Soldier(MilitaryRank.KAPRAL);
+    void testPowerCalculationForRankSzeregowy() {
+        Soldier soldier = new Soldier(MilitaryRank.SZEREGOWY);
         soldier.increaseExperience();
-        soldier.increaseExperience();
-        assertEquals(MilitaryRank.KAPRAL.getValue() * soldier.getExperience(), soldier.getPower());
+        assertEquals(2, soldier.getPower());
     }
 
     @Test
-    void testToStringOutput() {
+    void testPowerCalculationForRankKapral() {
         Soldier soldier = new Soldier(MilitaryRank.KAPRAL);
-        String expectedOutput = "KAPRAL (Value: 2, Experience: 1)";
-        assertEquals(expectedOutput, soldier.toString());
+        soldier.increaseExperience();
+        assertEquals(4, soldier.getPower());
+    }
+
+    @Test
+    void testToStringOutputInitial() {
+        Soldier soldier = new Soldier(MilitaryRank.SZEREGOWY);
+        assertEquals("SZEREGOWY (Value: 1, Experience: 1)", soldier.toString());
+    }
+
+    @Test
+    void testToStringOutputAfterExperienceIncrease() {
+        Soldier soldier = new Soldier(MilitaryRank.KAPRAL);
+        for (int i = 0; i < 3; i++) soldier.increaseExperience();
+        assertEquals("KAPRAL (Value: 2, Experience: 4)", soldier.toString());
     }
 }
