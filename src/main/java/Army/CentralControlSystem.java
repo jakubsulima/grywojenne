@@ -2,15 +2,16 @@ package Army;
 
 import java.io.*;
 import java.util.Scanner;
+import java.time.LocalDateTime;
 
 public class CentralControlSystem {
     private General general1;
     private General general2;
     private Logger logger;
     private Secretary secretary;
-    private Scanner scanner = new Scanner(System.in);
     private boolean gameRunning;
     private General currentGeneral;
+    private int turn=1;
 
     public CentralControlSystem() {
         logger = new Logger();
@@ -18,16 +19,37 @@ public class CentralControlSystem {
     }
 
     public void startGame() {
-        initializeGenerals();
+        System.out.println("Welcome to the General Battle Game!");
+        System.out.println("1. New Game");
+        System.out.println("2. Load Game");
+
+        Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
+
+        if (choice == 2) {
+            if (!loadGame()) {
+                System.out.println("Failed to load game. Starting a new game instead.");
+                initializeGenerals();
+            }
+        } else {
+            initializeGenerals();
+        }
+
         currentGeneral = general1;
 
         while (gameRunning) {
             processTurn(currentGeneral);
+            turn++;
             switchToNextGeneral();
+            secretary.displayGeneralsState(general1,general2);
         }
+
+        endGameReport();
     }
 
     private void initializeGenerals() {
+        Scanner scanner = new Scanner(System.in);
+
         System.out.println("Enter name for General 1:");
         String name1 = scanner.nextLine();
         general1 = new General(name1, 100);
@@ -36,11 +58,12 @@ public class CentralControlSystem {
         String name2 = scanner.nextLine();
         general2 = new General(name2, 100);
 
-        System.out.println("Game initialized with Generals:");
-        System.out.println(general1.getName() + " and " + general2.getName());
+        logger.logAction("Game initialized with Generals: " + general1.getName() + " and " + general2.getName());
     }
 
     private void processTurn(General general) {
+        Scanner scanner = new Scanner(System.in);
+
         System.out.println("\n========== " + general.getName() + "'s Turn ==========");
         System.out.println("Gold: " + general.getGold());
         System.out.println("Army Potential: " + general.getPotentialOfArmy());
@@ -55,10 +78,10 @@ public class CentralControlSystem {
 
         switch (choice) {
             case 1:
-                recruitSoldier(general);
+                recruitSoldier(general, scanner);
                 break;
             case 2:
-                trainSoldiers(general);
+                trainSoldiers(general, scanner);
                 break;
             case 3:
                 battle();
@@ -74,7 +97,7 @@ public class CentralControlSystem {
         }
     }
 
-    private void recruitSoldier(General general) {
+    private void recruitSoldier(General general, Scanner scanner) {
         System.out.println("Choose rank to recruit:");
         System.out.println("1. SZEREGOWY (Cost: 10)");
         System.out.println("2. KAPRAL (Cost: 20)");
@@ -108,7 +131,7 @@ public class CentralControlSystem {
         }
     }
 
-    private void trainSoldiers(General general) {
+    private void trainSoldiers(General general, Scanner scanner) {
         System.out.println("Enter number of soldiers to train:");
         int numSoldiers = scanner.nextInt();
 
@@ -128,9 +151,12 @@ public class CentralControlSystem {
     }
 
     private void saveGame() {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("savegame.dat"))) {
+        LocalDateTime now = LocalDateTime.now();
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("savegame- turn" +  turn + ".dat"))) {
             oos.writeObject(general1);
             oos.writeObject(general2);
+            oos.writeObject(turn);
+            oos.writeObject(currentGeneral);
             logger.logAction("Game saved successfully.");
             System.out.println("Game saved successfully.");
         } catch (IOException e) {
@@ -138,14 +164,34 @@ public class CentralControlSystem {
         }
     }
 
+    private boolean loadGame() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("savegame.dat"))) {
+            general1 = (General) ois.readObject();
+            general2 = (General) ois.readObject();
+            turn = (int) ois.readObject();
+            currentGeneral = (General) ois.readObject();
+            logger.logAction("Game loaded successfully.");
+            System.out.println("Game loaded successfully.");
+            return true;
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Failed to load game.");
+            return false;
+        }
+    }
+
     private void switchToNextGeneral() {
         currentGeneral = (currentGeneral == general1) ? general2 : general1;
-
     }
 
     private void exitGame() {
         gameRunning = false;
         System.out.println("Exiting the game.");
     }
-}
 
+    private void endGameReport() {
+        System.out.println("\nFinal Game State:");
+        general1.printArmy();
+        general2.printArmy();
+        logger.printLogs();
+    }
+}

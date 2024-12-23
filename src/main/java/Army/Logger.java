@@ -24,5 +24,11 @@ public class Logger {
         }
         System.out.println("========================\n");
     }
+
+    public void printLogs() {
+        for (String log : logs) {
+            System.out.println(log);
+        }
+    }
 }
 

@@ -1,6 +1,7 @@
 package Army;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -61,9 +62,9 @@ class General {
         int secondArmyPotential = opponent.getPotentialOfArmy();
         Random random = new Random();
         if (firstArmyPotential == secondArmyPotential) {
-            army.remove(random.nextInt(army.size()-1));
-            opponent.army.remove(random.nextInt(army.size()-1));
-        } else if (firstArmyPotential > secondArmyPotential) {
+            army.remove(random.nextInt(army.size()));
+            opponent.army.remove(random.nextInt(opponent.army.size()));
+        } else if (firstArmyPotential < secondArmyPotential) {
             lose(opponent);
         } else {
             opponent.lose(this);
@@ -73,9 +74,10 @@ class General {
 
     public void lose(General opponent) {
         opponent.addGold( (reduceGold( (int)(getGold()*0.1) )));
-        for (Soldier soldier : army) {
-            if (!soldier.decreaseExperience()) {
-                army.remove(soldier);
+        Iterator<Soldier> iterator = army.iterator();
+        while (iterator.hasNext()) {
+            if (!iterator.next().decreaseExperience()) {
+                iterator.remove();
             }
         }
     }
@@ -85,7 +87,7 @@ class General {
     }
 
     public void addGold(int gold) {
-        this.gold = gold;
+        this.gold += gold;
     }
 
     public int reduceGold(int gold) {
@@ -110,10 +112,13 @@ class General {
     }
 
     public void printArmy() {
-        System.out.println(name + "'s Army:");
         for (Soldier soldier : army) {
             System.out.println(soldier);
         }
+    }
+
+    public String getName() {
+        return name;
     }
 }
 
