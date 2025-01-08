@@ -1,11 +1,13 @@
 package Army;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-class General {
+class General implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String name;
     private int gold;
     private ArrayList<Soldier> army;
@@ -27,18 +29,19 @@ class General {
         army.add(soldier);
     }
 
-    public void maneuvers(int numberOfSoldiers) {
+    public boolean maneuvers(int numberOfSoldiers) {
         if (numberOfSoldiers > army.size() || numberOfSoldiers < 1) {
             System.out.println("wrong number of Soldiers");
-            return;
+            return false;
         }
         if (gold < getCostOfManeuvers()) {
             System.out.println("Not enough money to do maneuvers");
-            return;
+            return false;
         }
         for (int i = 0; i < numberOfSoldiers; i++) {
             army.get(i).increaseExperience();
         }
+        return true;
     }
 
     private int getCostOfManeuvers() {
@@ -119,6 +122,10 @@ class General {
 
     public String getName() {
         return name;
+    }
+
+    public int getArmySize() {
+        return army.size();
     }
 }
 

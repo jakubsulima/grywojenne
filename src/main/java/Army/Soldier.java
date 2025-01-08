@@ -1,6 +1,8 @@
 package Army;
+import java.io.Serializable;
 
-class Soldier {
+class Soldier implements Serializable{
+    private static final long serialVersionUID = 1L;
     private MilitaryRank rank;
     private int experience;
 

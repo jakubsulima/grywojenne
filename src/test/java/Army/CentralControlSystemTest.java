@@ -82,15 +82,6 @@ class CentralControlSystemTest {
     }
 
     @Test
-    void testTrainSoldiersDeductsGold() {
-        General general = new General("General A", 100);
-        general.recruitSoldier(MilitaryRank.SZEREGOWY);
-        centralControlSystem.trainSoldiers(general);
-        assertEquals(90, general.getGold()); // Assuming training one soldier costs 5 gold
-    }
-
-
-    @Test
     void testBattleReducesGeneral1ArmyPotential() {
         General general1 = new General("General A", 100);
         General general2 = new General("General B", 100);

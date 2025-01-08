@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53f7ea1a-8e0b-40d9-b644-2e632d46772a" name="Changes" comment="added Secretary">
-      <change afterPath="$PROJECT_DIR$/src/test/java/Army/GeneralTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/Army/SecretaryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="53f7ea1a-8e0b-40d9-b644-2e632d46772a" name="Changes" comment="added new functionality of saving and loading game">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Army/CentralControlSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Army/CentralControlSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Army/General.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Army/General.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Army/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Army/Logger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Army/Secretary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Army/Secretary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Army/Soldier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Army/Soldier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Army/CentralControlSystemTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Army/CentralControlSystemTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +56,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.CentralControlSystemTest.executor": "Run",
+    "Gradle.CentralControlSystemTest.testGeneral2Name.executor": "Run",
     "Gradle.GeneralTest.testBattleDrawRemovesSoldiers.executor": "Debug",
     "Gradle.LoggerTest.executor": "Run",
     "Gradle.SecretaryTest.executor": "Run",
@@ -88,7 +87,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Gradle.Tests in 'GryWojenne.test'">
-    <configuration name="LoggerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="CentralControlSystemTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -101,7 +100,31 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;Army.LoggerTest&quot;" />
+            <option value="&quot;Army.CentralControlSystemTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="CentralControlSystemTest.testGeneral2Name" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;Army.CentralControlSystemTest.testGeneral2Name&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -126,30 +149,6 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;Army.SecretaryTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="SoldierTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;Army.SoldierTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -209,10 +208,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.Tests in 'GryWojenne.test'" />
-        <item itemvalue="Gradle.SecretaryTest" />
+        <item itemvalue="Gradle.CentralControlSystemTest.testGeneral2Name" />
+        <item itemvalue="Gradle.CentralControlSystemTest" />
         <item itemvalue="Gradle.Tests in 'Army'" />
-        <item itemvalue="Gradle.LoggerTest" />
-        <item itemvalue="Gradle.SoldierTest" />
+        <item itemvalue="Gradle.SecretaryTest" />
       </list>
     </recent_temporary>
   </component>
@@ -233,7 +232,8 @@
       <option name="presentableId" value="Default" />
       <updated>1734346869029</updated>
       <workItem from="1734346870088" duration="11488000" />
-      <workItem from="1734966362335" duration="7258000" />
+      <workItem from="1734966362335" duration="23013000" />
+      <workItem from="1735975484640" duration="11101000" />
     </task>
     <task id="LOCAL-00001" summary="Added solider class">
       <option name="closed" value="true" />
@@ -283,7 +283,23 @@
       <option name="project" value="LOCAL" />
       <updated>1734968404209</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="added new functionality">
+      <option name="closed" value="true" />
+      <created>1734977083548</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1734977083548</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added new functionality of saving and loading game">
+      <option name="closed" value="true" />
+      <created>1736327529770</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1736327529770</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,7 +312,9 @@
     <MESSAGE value="added general" />
     <MESSAGE value="added CentralControlSystem" />
     <MESSAGE value="added Secretary" />
-    <option name="LAST_COMMIT_MESSAGE" value="added Secretary" />
+    <MESSAGE value="added new functionality" />
+    <MESSAGE value="added new functionality of saving and loading game" />
+    <option name="LAST_COMMIT_MESSAGE" value="added new functionality of saving and loading game" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
