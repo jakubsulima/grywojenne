@@ -56,7 +56,6 @@ public class CentralControlSystem {
             System.out.println("5. Exit");
 
             int choice = scanner.nextInt();
-
             switch (choice) {
                 case 1:
                     recruitSoldier(general);
@@ -193,7 +192,7 @@ public boolean loadGame() {
                 }
             } else {
                 System.out.println("Invalid input. Please enter a number.");
-                scanner.next(); // Clear invalid input
+                scanner.next();
             }
         }
 
